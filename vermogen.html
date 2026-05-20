@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vermogen – Annemarie Bosman</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sand: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --moss: #4A5A3A;
+    --sage: #7A8F6A;
+    --terracotta: #C4714A;
+    --clay: #D4956A;
+    --dark: #1E2018;
+    --mid: #5A5A4A;
+    --ink: #0F1A2E;
+    --steel: #2A3A52;
+    --electric: #4A9EBF;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,248,244,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: 0.05em; color: var(--moss); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+  .nav-cta { background: var(--moss); color: white !important; padding: 10px 22px; border-radius: 2px; }
+  .nav-cta:hover { background: var(--terracotta) !important; }
+
+  /* HERO — donker, scherp */
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;
+    background: var(--ink);
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(74,158,191,0.12) 0%, transparent 60%);
+  }
+  .hero-left {
+    padding: 100px 64px 80px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .breadcrumb {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 32px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .breadcrumb a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--clay); }
+  .breadcrumb span { color: var(--clay); }
+  .pijler-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--electric); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pijler-label::before { content: '02'; font-size: 0.65rem; opacity: 0.5; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5.5vw, 6rem);
+    font-weight: 300; line-height: 1;
+    color: white; margin-bottom: 8px;
+  }
+  .hero-sub-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-style: italic; color: var(--electric);
+    margin-bottom: 36px; font-weight: 300;
+  }
+  .hero-intro {
+    font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.55);
+    font-weight: 300; max-width: 440px; margin-bottom: 48px;
+  }
+  .hero-ctas { display: flex; gap: 16px; align-items: center; }
+  .btn-primary { background: var(--electric); color: white; padding: 14px 32px; font-size: 0.85rem; letter-spacing: 0.06em; text-decoration: none; border-radius: 2px; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--terracotta); }
+  .btn-ghost { color: rgba(255,255,255,0.6); font-size: 0.85rem; text-decoration: none; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; transition: color 0.2s; }
+  .btn-ghost:hover { color: white; border-color: white; }
+
+  .hero-right {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 48px;
+  }
+  .brain-visual {
+    width: 100%; max-width: 400px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .brain-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 20px; border-radius: 2px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .brain-card:hover { background: rgba(74,158,191,0.08); border-color: rgba(74,158,191,0.2); }
+  .brain-card.span-2 { grid-column: 1 / -1; }
+  .brain-card .bc-label {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--electric); margin-bottom: 8px; display: block;
+  }
+  .brain-card .bc-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: white; font-weight: 300;
+  }
+  .brain-card .bc-sub {
+    font-size: 0.75rem; color: rgba(255,255,255,0.35);
+    font-weight: 300; margin-top: 4px; line-height: 1.4;
+  }
+
+  /* PIJLER NAV */
+  .pijler-nav {
+    background: white;
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+    display: flex; gap: 0; align-items: stretch;
+  }
+  .pijler-nav a {
+    flex: 1; padding: 24px 32px;
+    text-align: center; text-decoration: none;
+    border-right: 1px solid rgba(74,90,58,0.1);
+    transition: background 0.2s;
+  }
+  .pijler-nav a:last-child { border-right: none; }
+  .pijler-nav a:hover { background: var(--sand); }
+  .pijler-nav a.active { background: var(--sand); }
+  .pijler-num { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); display: block; margin-bottom: 4px; }
+  .pijler-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--dark); font-weight: 400; }
+  .pijler-sub { font-size: 0.72rem; color: var(--mid); font-weight: 300; display: block; margin-top: 2px; }
+
+  /* BREIN SECTIE */
+  .brein {
+    padding: 100px 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    background: var(--warm-white);
+  }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 20px; display: block; }
+  .brein h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 28px;
+  }
+  .brein h2 em { font-style: italic; color: var(--moss); }
+  .brein p { font-size: 0.95rem; line-height: 1.8; color: var(--mid); font-weight: 300; margin-bottom: 20px; }
+  .brein-feiten {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid rgba(74,90,58,0.12);
+  }
+  .feit {
+    padding: 28px 32px;
+    border-bottom: 1px solid rgba(74,90,58,0.08);
+    display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start;
+  }
+  .feit:last-child { border-bottom: none; }
+  .feit-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; color: var(--terracotta); line-height: 1;
+  }
+  .feit h3 { font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; color: var(--dark); }
+  .feit p { font-size: 0.82rem; color: var(--mid); font-weight: 300; line-height: 1.6; margin: 0; }
+
+  /* VROUWENBREIN */
+  .vrouwenbrein {
+    padding: 100px 80px;
+    background: var(--sand);
+  }
+  .vrouwenbrein-header { margin-bottom: 64px; max-width: 600px; }
+  .vrouwenbrein-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 20px;
+  }
+  .vrouwenbrein-header p { font-size: 0.95rem; line-height: 1.8; color: var(--mid); font-weight: 300; }
+  .fasen-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+  .fase-card {
+    background: white; padding: 40px 32px;
+    border-top: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .fase-card:hover { border-top-color: var(--terracotta); }
+  .fase-icon { font-size: 1.8rem; margin-bottom: 16px; display: block; }
+  .fase-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 12px; }
+  .fase-text { font-size: 0.82rem; line-height: 1.7; color: var(--mid); font-weight: 300; }
+
+  /* WEB3 SECTIE */
+  .web3 {
+    padding: 100px 80px;
+    background: var(--ink);
+    color: white;
+    position: relative; overflow: hidden;
+  }
+  .web3::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(74,158,191,0.1) 0%, transparent 60%);
+  }
+  .web3-inner { position: relative; z-index: 1; }
+  .web3-header { margin-bottom: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+  .web3-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 300; line-height: 1.15; color: white;
+  }
+  .web3-header h2 em { font-style: italic; color: var(--electric); }
+  .web3-header p { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .web3-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .web3-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 40px 32px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .web3-card:hover { background: rgba(74,158,191,0.06); }
+  .web3-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, var(--electric), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .web3-card:hover::before { opacity: 1; }
+  .web3-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(74,158,191,0.3);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; margin-bottom: 24px;
+  }
+  .web3-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: white; margin-bottom: 12px; }
+  .web3-card p { font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.45); font-weight: 300; }
+  .web3-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(74,158,191,0.15); border: 1px solid rgba(74,158,191,0.2);
+    color: var(--electric); font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .web3-label::before { content: '◆'; font-size: 0.4rem; }
+  .web3-coming { margin-top: 48px; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+  .web3-coming p { font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.7; }
+  .web3-coming strong { color: var(--electric); font-weight: 400; }
+
+  /* COACHING */
+  .coaching {
+    padding: 100px 80px;
+    background: var(--warm-white);
+  }
+  .coaching-header { margin-bottom: 64px; }
+  .coaching-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 16px;
+  }
+  .coaching-header p { font-size: 0.95rem; color: var(--mid); font-weight: 300; line-height: 1.75; max-width: 520px; }
+  .coaching-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .coaching-card {
+    background: var(--sand); padding: 48px 40px;
+    border-radius: 2px; position: relative; overflow: hidden;
+  }
+  .coaching-card.featured { background: var(--moss); color: white; }
+  .coaching-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 8px; }
+  .coaching-card.featured h3 { color: white; }
+  .coaching-duur { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 24px; display: block; }
+  .coaching-card.featured .coaching-duur { color: var(--clay); }
+  .coaching-card p { font-size: 0.9rem; line-height: 1.75; color: var(--mid); font-weight: 300; margin-bottom: 32px; }
+  .coaching-card.featured p { color: rgba(255,255,255,0.65); }
+  .coaching-includes { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+  .coaching-includes li { font-size: 0.82rem; color: var(--mid); font-weight: 300; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+  .coaching-card.featured .coaching-includes li { color: rgba(255,255,255,0.6); }
+  .coaching-includes li::before { content: '✓'; color: var(--terracotta); font-size: 0.85rem; flex-shrink: 0; }
+  .coaching-card.featured .coaching-includes li::before { color: var(--clay); }
+  .btn-card { background: var(--moss); color: white; padding: 14px 28px; font-size: 0.82rem; letter-spacing: 0.06em; text-decoration: none; border-radius: 2px; text-align: center; transition: background 0.2s; display: block; }
+  .btn-card:hover { background: var(--terracotta); }
+  .coaching-card.featured .btn-card { background: white; color: var(--moss); }
+  .coaching-card.featured .btn-card:hover { background: var(--sand); }
+
+  /* CTA */
+  .cta-blok {
+    padding: 100px 80px;
+    background: var(--steel); color: white;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center;
+  }
+  .cta-blok h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; line-height: 1.15; color: white; }
+  .cta-blok h2 em { font-style: italic; color: var(--electric); }
+  .cta-right p { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.55); font-weight: 300; margin-bottom: 36px; }
+  .btn-white { background: white; color: var(--ink); padding: 16px 36px; font-size: 0.85rem; letter-spacing: 0.06em; text-decoration: none; border-radius: 2px; display: inline-block; transition: background 0.2s; }
+  .btn-white:hover { background: var(--sand); }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.4); padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; letter-spacing: 0.06em; }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: var(--clay); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .pijler-label { animation: fadeUp 0.6s 0.1s both; }
+  h1 { animation: fadeUp 0.6s 0.2s both; }
+  .hero-sub-title { animation: fadeUp 0.6s 0.3s both; }
+  .hero-intro { animation: fadeUp 0.6s 0.4s both; }
+  .hero-ctas { animation: fadeUp 0.6s 0.5s both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 24px; }
+    .hero-right { padding: 40px 24px; }
+    .pijler-nav { overflow-x: auto; }
+    .pijler-nav a { padding: 16px 20px; min-width: 140px; }
+    .brein { grid-template-columns: 1fr; padding: 60px 24px; }
+    .vrouwenbrein { padding: 60px 24px; }
+    .fasen-grid { grid-template-columns: 1fr 1fr; }
+    .web3 { padding: 60px 24px; }
+    .web3-header { grid-template-columns: 1fr; }
+    .web3-grid { grid-template-columns: 1fr; }
+    .coaching { padding: 60px 24px; }
+    .coaching-grid { grid-template-columns: 1fr; }
+    .cta-blok { grid-template-columns: 1fr; padding: 60px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Annemarie Bosman</a>
+  <ul class="nav-links">
+    <li><a href="vitaliteit.html">Vitaliteit</a></li>
+    <li><a href="vermogen.html" class="active">Vermogen</a></li>
+    <li><a href="vrijheid.html">Vrijheid</a></li>
+    <li><a href="over.html">Over mij</a></li>
+    <li><a href="over.html#contact" class="nav-cta">Kennismaken</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>Vermogen</span></div>
+    <div class="pijler-label">Pijler 02</div>
+    <h1>Vermogen</h1>
+    <div class="hero-sub-title">Brein, eigenaarschap & kracht</div>
+    <p class="hero-intro">
+      Als je lichaam herstelt, ontwaakt je brein. Vermogen betekent: helder denken,
+      keuzes maken vanuit kracht, en eigenaarschap nemen over je eigen gezondheid — en data.
+    </p>
+    <div class="hero-ctas">
+      <a href="#coaching" class="btn-primary">Bekijk de coaching</a>
+      <a href="#web3" class="btn-ghost">Web3 & gezondheid →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="brain-visual">
+      <div class="brain-card">
+        <span class="bc-label">Brein</span>
+        <div class="bc-value">Helderheid</div>
+        <div class="bc-sub">Focus & scherpte terugvinden</div>
+      </div>
+      <div class="brain-card">
+        <span class="bc-label">Hormonen</span>
+        <div class="bc-value">Balans</div>
+        <div class="bc-sub">Cyclus, overgang & stemming</div>
+      </div>
+      <div class="brain-card">
+        <span class="bc-label">Eigenaarschap</span>
+        <div class="bc-value">Controle</div>
+        <div class="bc-sub">Jouw gezondheidsdata, van jou</div>
+      </div>
+      <div class="brain-card">
+        <span class="bc-label">Web3</span>
+        <div class="bc-value">Soeverein</div>
+        <div class="bc-sub">Blockchain-verified gezondheid</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pijler-nav">
+  <a href="vitaliteit.html">
+    <span class="pijler-num">01</span>
+    <span class="pijler-name">Vitaliteit</span>
+    <span class="pijler-sub">Lichaam & microbioom</span>
+  </a>
+  <a href="vermogen.html" class="active">
+    <span class="pijler-num">02</span>
+    <span class="pijler-name">Vermogen</span>
+    <span class="pijler-sub">Brein & eigenaarschap</span>
+  </a>
+  <a href="vrijheid.html">
+    <span class="pijler-num">03</span>
+    <span class="pijler-name">Vrijheid</span>
+    <span class="pijler-sub">Leefstijl & leven</span>
+  </a>
+</div>
+
+<section class="brein">
+  <div>
+    <span class="section-label">Het vrouwenbrein</span>
+    <h2>Vrouwen hebben een <em>ander brein</em> — en andere behoeften</h2>
+    <p>Vrouwen denken anders, voelen anders en hebben andere levensfases dan mannen. Toch is de meeste medische kennis gebaseerd op mannelijk onderzoek. Het wordt tijd dat dat verandert.</p>
+    <p>Breinoptimalisatie voor vrouwen betekent: werken met je cyclus, je hormonen begrijpen, en leren hoe je jouw unieke neurologie kunt inzetten als kracht in plaats van als struikelblok.</p>
+    <a href="#coaching" class="btn-primary" style="display:inline-block;margin-top:16px;">Bekijk de coaching →</a>
+  </div>
+  <div class="brein-feiten">
+    <div class="feit">
+      <div class="feit-num">↔</div>
+      <div>
+        <h3>Verbindingen</h3>
+        <p>Het vrouwenbrein heeft meer verbindingen tussen de linker- en rechterhersenhelft — wat leidt tot meer empathie en intuitie, maar ook meer gevoeligheid voor stress.</p>
+      </div>
+    </div>
+    <div class="feit">
+      <div class="feit-num">⌀</div>
+      <div>
+        <h3>Hormonen & neurotransmitters</h3>
+        <p>Oestrogeen beïnvloedt serotonine, dopamine en cortisol direct. Hormonale schommelingen zijn dus hersenschommelingen — en omgekeerd.</p>
+      </div>
+    </div>
+    <div class="feit">
+      <div class="feit-num">∞</div>
+      <div>
+        <h3>Levensfases</h3>
+        <p>Puberteit, cyclus, zwangerschap, postpartum, perimenopauze, menopauze — elk vraagt om een andere aanpak. Geen one-size-fits-all.</p>
+      </div>
+    </div>
+    <div class="feit">
+      <div class="feit-num">◎</div>
+      <div>
+        <h3>Microbioom-brein as</h3>
+        <p>De darm-hersen verbinding is bij vrouwen sterker aanwezig. Buikgezondheid is direct gekoppeld aan mentale helderheid en stemming.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vrouwenbrein">
+  <div class="vrouwenbrein-header">
+    <span class="section-label">Levensfases</span>
+    <h2>Elke fase vraagt om een eigen aanpak</h2>
+    <p>Van je eerste cyclus tot de overgang en daarna — ik begeleid vrouwen in alle levensfases. Altijd met oog voor wie jij bent en wat jouw lichaam op dit moment nodig heeft.</p>
+  </div>
+  <div class="fasen-grid">
+    <div class="fase-card">
+      <span class="fase-icon">🌸</span>
+      <div class="fase-title">Reproductieve fase</div>
+      <p class="fase-text">Cyclusklachten, PMS, vruchtbaarheid, energieschommelingen — leer werken met je cyclus in plaats van ertegen.</p>
+    </div>
+    <div class="fase-card">
+      <span class="fase-icon">🤰</span>
+      <div class="fase-title">Zwangerschap & postpartum</div>
+      <p class="fase-text">Voeding, suppletie en microbioom-ondersteuning voor moeder en kind. Herstel na de bevalling.</p>
+    </div>
+    <div class="fase-card">
+      <span class="fase-icon">🌊</span>
+      <div class="fase-title">Perimenopauze</div>
+      <p class="fase-text">De jaren voor de overgang: hormonale fluctuaties, slaapproblemen, stemmingswisselingen. Hier kun je veel voor doen.</p>
+    </div>
+    <div class="fase-card">
+      <span class="fase-icon">✨</span>
+      <div class="fase-title">Menopauze & daarna</div>
+      <p class="fase-text">Energie, helderheid en vitaliteit houden in de tweede helft van je leven. De beste jaren kunnen nog komen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WEB3 -->
+<section class="web3" id="web3">
+  <div class="web3-inner">
+    <div class="web3-header">
+      <h2>Jouw gezondheid.<br><em>Jouw data.</em><br>Jouw vermogen.</h2>
+      <p>Web3 verandert de manier waarop we omgaan met persoonlijke data — ook gezondheidsdata. In plaats van dat jouw gegevens eigendom zijn van een zorginstelling of techbedrijf, kun jij straks zelf de baas zijn over wat je deelt, met wie en wanneer.</p>
+    </div>
+    <div class="web3-grid">
+      <div class="web3-card">
+        <div class="web3-label">Datasoevereiniteit</div>
+        <div class="web3-icon">🔐</div>
+        <h3>Jij bezit je data</h3>
+        <p>Op de blockchain is jouw gezondheidsdata van jou — niet van een verzekeraar, ziekenhuis of app. Jij bepaalt wie toegang krijgt en onder welke voorwaarden.</p>
+      </div>
+      <div class="web3-card">
+        <div class="web3-label">Transparantie</div>
+        <div class="web3-icon">🔗</div>
+        <h3>Verifieerbare gezondheid</h3>
+        <p>Stel je voor: je gezondheidsverbeteringen zijn aantoonbaar en verifieerbaar op de blockchain. Geen greenwashing, geen marketingpraatjes — alleen bewijs.</p>
+      </div>
+      <div class="web3-card">
+        <div class="web3-label">Community</div>
+        <div class="web3-icon">⬡</div>
+        <h3>Gedecentraliseerde zorg</h3>
+        <p>Een community van mensen die gezamenlijk eigenaarschap nemen over hun gezondheid — zonder tussenpersoon. Peer-to-peer kennis, eerlijk beloond.</p>
+      </div>
+    </div>
+    <div class="web3-coming">
+      <p>🌱 <strong>In ontwikkeling:</strong> Annemarie werkt aan een Web3-gezondheidsplatform op het Internet Computer Protocol (ICP) — de blockchain die websites en applicaties volledig gedecentraliseerd kan hosten. Wil je op de hoogte blijven? Meld je aan voor de vroege toegang.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COACHING -->
+<section class="coaching" id="coaching">
+  <div class="coaching-header">
+    <span class="section-label">Begeleiding</span>
+    <h2>Breinoptimalisatie coaching</h2>
+    <p>Persoonlijke coaching specifiek gericht op vrouwengezondheid, hormonale balans en mentale helderheid. Altijd op maat, altijd met de wetenschap als basis.</p>
+  </div>
+  <div class="coaching-grid">
+    <div class="coaching-card featured">
+      <h3>1-op-1 Brein&shy;coaching</h3>
+      <span class="coaching-duur">3 maanden · persoonlijk traject</span>
+      <p>Een diepgaand coachingtraject waarbij we jouw brein, hormonen en microbioom als één systeem benaderen. Voor vrouwen die klaar zijn voor echte verandering.</p>
+      <ul class="coaching-includes">
+        <li>Uitgebreide neurotransmitter & hormoonanalyse</li>
+        <li>Maandelijkse 1-op-1 sessies (90 min)</li>
+        <li>Persoonlijk suppletie- en voedingsprotocol</li>
+        <li>MBCT oefeningen & mindfulnessplan</li>
+        <li>Doorlopende begeleiding</li>
+      </ul>
+      <a href="over.html#contact" class="btn-card">Gratis kennismaken</a>
+    </div>
+    <div class="coaching-card">
+      <h3>Vrouwenbrein Analyse</h3>
+      <span class="coaching-duur">Eénmalig · startpunt</span>
+      <p>Een uitgebreide analyse van jouw neurotransmitterniveaus, hormonale patroon en breinprofiel. Met een concreet actieplan als resultaat.</p>
+      <ul class="coaching-includes">
+        <li>Uitgebreide digitale vragenlijst</li>
+        <li>Persoonlijk analysegesprek (90 min)</li>
+        <li>Geschreven brein- & hormoonprofiel</li>
+        <li>Suppletie- en leefstijladvies op maat</li>
+      </ul>
+      <a href="over.html#contact" class="btn-card">Meer informatie</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-blok">
+  <div class="cta-left">
+    <h2>Neem <em>eigenaarschap</em> over je brein, je gezondheid en je data.</h2>
+  </div>
+  <div class="cta-right">
+    <p>Begin met een gratis kennismaking. We bespreken waar jij staat, wat jouw brein nodig heeft en hoe we samen het beste uit jou naar boven halen.</p>
+    <a href="over.html#contact" class="btn-white">Plan een gratis kennismaking</a>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 Annemarie Bosman · <a href="#">Disclaimer</a> · <a href="#">Algemene Voorwaarden</a> · <a href="#">Privacy</a></div>
+  <div>Ontwerp door <a href="#">Studio Fingerspitzengefühl</a></div>
+</footer>
+</body>
+</html>

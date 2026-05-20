@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annemarie Bosman – Van uitgeput naar vrij</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --moss: #4A5A3A;
+    --sage: #7A8F6A;
+    --terracotta: #C4714A;
+    --clay: #D4956A;
+    --dark: #1E2018;
+    --mid: #5A5A4A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--moss);
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-cta {
+    background: var(--moss);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { background: var(--terracotta) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 80px;
+    position: relative;
+  }
+  .hero-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--terracotta);
+  }
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 32px;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--moss);
+  }
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--mid);
+    max-width: 420px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+  .hero-ctas {
+    display: flex; gap: 16px; align-items: center;
+  }
+  .btn-primary {
+    background: var(--moss);
+    color: white;
+    padding: 14px 32px;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--terracotta); }
+  .btn-ghost {
+    color: var(--moss);
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--moss);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--sand);
+  }
+  .hero-img-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #E8DFD0 0%, #D4C9B5 50%, #C4B89A 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .hero-img-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(196,113,74,0.12) 0%, transparent 70%);
+  }
+  .hero-quote {
+    position: absolute;
+    bottom: 48px; left: -32px;
+    background: white;
+    padding: 24px 32px;
+    max-width: 280px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    border-left: 3px solid var(--terracotta);
+  }
+  .hero-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--dark);
+  }
+  .hero-quote span {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* DRIEHOEK SECTIE */
+  .driehoek {
+    padding: 120px 80px;
+    background: var(--dark);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .driehoek::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 60px;
+    background: var(--warm-white);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+  }
+  .driehoek-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .driehoek-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: white;
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+  .driehoek-header p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .driehoek-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .driehoek-card {
+    padding: 56px 48px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .driehoek-card:hover { background: rgba(255,255,255,0.04); }
+  .driehoek-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--terracotta);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .driehoek-card:hover::before { transform: scaleX(1); }
+  .card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    margin-bottom: 32px;
+    display: block;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .card-subtitle {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .card-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+  .card-diensten {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card-diensten li {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    display: flex; align-items: center; gap: 10px;
+    letter-spacing: 0.04em;
+  }
+  .card-diensten li::before {
+    content: '';
+    width: 16px; height: 1px;
+    background: var(--terracotta);
+    flex-shrink: 0;
+  }
+
+  /* WIE BEN IK */
+  .over {
+    padding: 120px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .over-img {
+    position: relative;
+  }
+  .over-img-box {
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, #D4C9B5, #B8A990);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .over-img-box::after {
+    content: '↑ foto Annemarie';
+    position: absolute;
+    bottom: 20px; right: 20px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+  }
+  .over-accent {
+    position: absolute;
+    bottom: -24px; right: -24px;
+    width: 120px; height: 120px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .over-content {}
+  .over-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .over-content h2 em { font-style: italic; color: var(--moss); }
+  .over-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--mid);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .vakgebieden {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 32px 0 40px;
+  }
+  .vak-tag {
+    background: var(--sand);
+    color: var(--moss);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+
+  /* TRANSFORMATIE */
+  .transformatie {
+    padding: 80px;
+    background: var(--sand);
+  }
+  .transformatie-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .transformatie h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .transformatie > .transformatie-inner > p {
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 64px;
+    font-size: 0.95rem;
+  }
+  .journey {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 64px;
+  }
+  .journey-step {
+    flex: 1;
+    text-align: center;
+    padding: 32px 24px;
+  }
+  .journey-step .step-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid rgba(74,90,58,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.3rem;
+  }
+  .journey-step h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .journey-step p {
+    font-size: 0.8rem;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .journey-arrow {
+    color: var(--terracotta);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+  .klachten-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    text-align: left;
+  }
+  .klacht-item {
+    background: white;
+    padding: 24px;
+    border-radius: 2px;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .klacht-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .klacht-item p { font-size: 0.88rem; line-height: 1.5; color: var(--mid); font-weight: 300; }
+
+  /* RECENSIES */
+  .recensies {
+    padding: 120px 80px;
+    background: var(--warm-white);
+  }
+  .recensies-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .recensies-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+  .recensies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .recensie-card {
+    background: var(--sand);
+    padding: 40px 36px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .recensie-card::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--terracotta);
+    opacity: 0.2;
+    position: absolute;
+    top: 10px; left: 28px;
+    line-height: 1;
+  }
+  .recensie-card p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--mid);
+    font-weight: 300;
+    margin-bottom: 24px;
+    margin-top: 16px;
+  }
+  .recensie-naam {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+  }
+
+  /* CTA BLOK */
+  .cta-blok {
+    padding: 100px 80px;
+    background: var(--moss);
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .cta-blok h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: white;
+  }
+  .cta-blok h2 em { font-style: italic; color: var(--clay); }
+  .cta-right p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+  .btn-white {
+    background: white;
+    color: var(--moss);
+    padding: 16px 36px;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-white:hover { background: var(--sand); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.4);
+    padding: 48px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: var(--clay); }
+
+  /* ANNOTATIES */
+  .annotation {
+    display: inline-block;
+    background: rgba(196,113,74,0.12);
+    border: 1px dashed rgba(196,113,74,0.4);
+    color: var(--terracotta);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-left: 10px;
+    vertical-align: middle;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag   { animation: fadeUp 0.7s 0.1s both; }
+  .hero-h1    { animation: fadeUp 0.7s 0.25s both; }
+  .hero-sub   { animation: fadeUp 0.7s 0.4s both; }
+  .hero-ctas  { animation: fadeUp 0.7s 0.55s both; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 24px; }
+    .hero-right { height: 360px; }
+    .hero-quote { left: 16px; right: 16px; bottom: 24px; max-width: none; }
+    .driehoek { padding: 80px 24px; }
+    .driehoek-grid { grid-template-columns: 1fr; gap: 0; }
+    .over { grid-template-columns: 1fr; padding: 80px 24px; }
+    .transformatie { padding: 80px 24px; }
+    .klachten-grid { grid-template-columns: 1fr 1fr; }
+    .journey { flex-direction: column; }
+    .journey-arrow { transform: rotate(90deg); }
+    .recensies { padding: 80px 24px; }
+    .recensies-grid { grid-template-columns: 1fr; }
+    .cta-blok { grid-template-columns: 1fr; padding: 80px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Annemarie Bosman</div>
+  <ul class="nav-links">
+    <li><a href="vitaliteit.html">Vitaliteit</a></li>
+    <li><a href="vermogen.html">Vermogen</a></li>
+    <li><a href="vrijheid.html">Vrijheid</a></li>
+    <li><a href="over.html">Over mij</a></li>
+    <li><a href="over.html#contact" class="nav-cta">Kennismaken</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Coach · Therapeut · Onderzoeker</div>
+    <h1 class="hero-h1">
+      Van een uitgeput <em>leven</em><br>
+      naar een vrij <em>leven</em>
+    </h1>
+    <p class="hero-sub">
+      Via je microbioom, je brein en je leefstijl —
+      begeleid door Annemarie Bosman.
+      Je lichaam weet wat het nodig heeft. Ik help je het te horen.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Gratis kennismaken</a>
+      <a href="#driehoek" class="btn-ghost">Hoe ik werk →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-placeholder">
+      [ foto Annemarie ]
+      <div class="hero-quote">
+        <p>"The microbiome is the boss. We have to respect and honor it in every single way."</p>
+        <span>— Annemarie Bosman</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIEHOEK: 3 PIJLERS -->
+<section class="driehoek" id="driehoek">
+  <div class="driehoek-header">
+    <span class="section-label">De drie pijlers</span>
+    <h2>Vitaliteit · Vermogen · Vrijheid</h2>
+    <p>Drie lagen, één reis. Je begint bij je lichaam en eindigt bij een leven dat echt van jou is.</p>
+  </div>
+  <div class="driehoek-grid">
+
+    <div class="driehoek-card" id="vitaliteit">
+      <span class="card-num">01</span>
+      <div class="card-title">Vitaliteit</div>
+      <span class="card-subtitle">Het lichaam als fundament</span>
+      <p class="card-text">
+        Alles begint in je buik. Je microbioom stuurt je hormonen, je immuunsysteem en je stemming.
+        Als de basis goed zit, stroomt de rest vanzelf.
+      </p>
+      <ul class="card-diensten">
+        <li>Microbioomtherapie (1-op-1, 3 maanden)</li>
+        <li>Microbioom Reset (groepsprogramma)</li>
+        <li>Voeding & suppletie op maat</li>
+        <li>Nutrogenomics & kPNI</li>
+      </ul>
+    </div>
+
+    <div class="driehoek-card" id="vermogen">
+      <span class="card-num">02</span>
+      <div class="card-title">Vermogen</div>
+      <span class="card-subtitle">Het brein volgt het lichaam</span>
+      <p class="card-text">
+        Vrouwen hebben een ander brein, andere hormonen, andere levensfases.
+        Breinoptimalisatie betekent: jouw versie van scherp, rustig en krachtig.
+      </p>
+      <ul class="card-diensten">
+        <li>Breinoptimalisatie coaching</li>
+        <li>Vrouwenbrein & hormonale gezondheid</li>
+        <li>Epigenetica & leefstijlanalyse</li>
+        <li>Mindfulness Based Cognitive Therapy</li>
+      </ul>
+    </div>
+
+    <div class="driehoek-card" id="vrijheid">
+      <span class="card-num">03</span>
+      <div class="card-title">Vrijheid</div>
+      <span class="card-subtitle">Leven zoals jij het wil</span>
+      <p class="card-text">
+        Als je lichaam en hoofd op orde zijn, komt er ruimte voor vreugde, smaak en verbinding.
+        Local Dolce Vita is de plek waar gezondheid een feest wordt.
+      </p>
+      <ul class="card-diensten">
+        <li>Local Dolce Vita foodclub</li>
+        <li>Streekproducten & lokaal eten</li>
+        <li>Community van gelijkgestemden</li>
+        <li>Events & culinaire ervaringen</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- OVER MIJ -->
+<section class="over" id="over">
+  <div class="over-img">
+    <div class="over-img-box"></div>
+    <div class="over-accent"></div>
+  </div>
+  <div class="over-content">
+    <span class="section-label" style="color:var(--terracotta)">Hoi, ik ben Annemarie</span>
+    <h2>Coach, therapeut en <em>onderzoeker</em> — met een grote liefde voor de mens</h2>
+    <p>
+      Ik werk vanuit de functionele geneeskunde, met de focus op het brein en het microbioom.
+      Ik doe wetenschappelijk onderzoek naar Ancestral and Functional Nutrition en heb
+      een grote liefde voor de blue zone leefstijl.
+    </p>
+    <p>
+      Mijn passie is mensen bewust te maken van hun eigen leiderschap in gezondheid,
+      vitaliteit en levensgeluk — en hen daar echt bij te begeleiden. Niet met een
+      standaard protocol, maar met oog voor wie jij bent.
+    </p>
+    <div class="vakgebieden">
+      <span class="vak-tag">Nutrogenomics</span>
+      <span class="vak-tag">kPNI</span>
+      <span class="vak-tag">Epigenetica</span>
+      <span class="vak-tag">MBCT</span>
+      <span class="vak-tag">Functionele geneeskunde</span>
+      <span class="vak-tag">Microbioom</span>
+    </div>
+    <a href="#contact" class="btn-primary">Meer over mij</a>
+  </div>
+</section>
+
+<!-- TRANSFORMATIEREIS -->
+<section class="transformatie">
+  <div class="transformatie-inner">
+    <span class="section-label" style="color:var(--terracotta)">De reis</span>
+    <h2>Herken jij dit?</h2>
+    <p>Veel vrouwen die bij mij komen, voelen dat er iets niet klopt — maar weten niet waar te beginnen.</p>
+
+    <div class="journey">
+      <div class="journey-step">
+        <div class="step-icon">😮‍💨</div>
+        <h3>Uitgeput</h3>
+        <p>Moe, wazig hoofd,<br>buikklachten, hormonen<br>die je in de steek laten</p>
+      </div>
+      <div class="journey-arrow">→</div>
+      <div class="journey-step">
+        <div class="step-icon">🌱</div>
+        <h3>Begrijpend</h3>
+        <p>Je leert de signalen<br>van je lichaam kennen<br>en begrijpen</p>
+      </div>
+      <div class="journey-arrow">→</div>
+      <div class="journey-step">
+        <div class="step-icon">✨</div>
+        <h3>Vrij</h3>
+        <p>Energie, helderheid<br>en een leven dat<br>echt van jou is</p>
+      </div>
+    </div>
+
+    <div class="klachten-grid">
+      <div class="klacht-item"><div class="klacht-dot"></div><p>Weinig energie, altijd moe</p></div>
+      <div class="klacht-item"><div class="klacht-dot"></div><p>Buikklachten die maar niet overgaan</p></div>
+      <div class="klacht-item"><div class="klacht-dot"></div><p>Wazig hoofd of concentratieproblemen</p></div>
+      <div class="klacht-item"><div class="klacht-dot"></div><p>Hormonale klachten of stemmingswisselingen</p></div>
+      <div class="klacht-item"><div class="klacht-dot"></div><p>Overgewicht ondanks gezond eten</p></div>
+      <div class="klacht-item"><div class="klacht-dot"></div><p>Klachten waar je arts geen antwoord op heeft</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENSIES -->
+<section class="recensies">
+  <div class="recensies-header">
+    <span class="section-label" style="color:var(--terracotta)">Ervaringen</span>
+    <h2>Wat anderen zeggen</h2>
+  </div>
+  <div class="recensies-grid">
+    <div class="recensie-card">
+      <p>Na een korte periode kon ik haar melden dat een deel van mijn klachten voor 90% waren verdwenen. Een beter resultaat dan ik durfde te dromen.</p>
+      <span class="recensie-naam">Ezra Pronk</span>
+    </div>
+    <div class="recensie-card">
+      <p>Ik stond versteld van de accuratesse van de resultaten. De supplementen vangen op natuurlijke wijze de ergste dalen op — ik ben heel erg tevreden.</p>
+      <span class="recensie-naam">Judith H.</span>
+    </div>
+    <div class="recensie-card">
+      <p>Ik volg het basismenu nu drie maanden en ben helemaal klachtenvrij. We volgen nu met het hele gezin deze manier van eten en het bevalt ons prima.</p>
+      <span class="recensie-naam">Hilde van Schijndel</span>
+    </div>
+  </div>
+</section>
+
+<!-- AFSLUITENDE CTA -->
+<section class="cta-blok" id="contact">
+  <div class="cta-left">
+    <h2>Klaar om te ontdekken wat <em>jouw</em> lichaam jou probeert te vertellen?</h2>
+  </div>
+  <div class="cta-right">
+    <p>
+      We beginnen altijd met een gratis kennismaking. Geen verplichtingen, geen standaard verhaal.
+      Gewoon een goed gesprek over waar jij staat en waar je naartoe wil.
+    </p>
+    <a href="mailto:annbosman@live.nl" class="btn-white">Plan een gratis kennismaking</a>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 Annemarie Bosman · Disclaimer · Algemene Voorwaarden · Privacyverklaring</div>
+  <div>Ontwerp door <a href="#">Studio Fingerspitzengefühl</a></div>
+</footer>
+
+</body>
+</html>

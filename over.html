@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Over mij – Annemarie Bosman</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sand: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --moss: #4A5A3A;
+    --sage: #7A8F6A;
+    --terracotta: #C4714A;
+    --clay: #D4956A;
+    --dark: #1E2018;
+    --mid: #5A5A4A;
+    --cream: #EDE6D6;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,248,244,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: 0.05em; color: var(--moss); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+  .nav-cta { background: var(--moss); color: white !important; padding: 10px 22px; border-radius: 2px; }
+  .nav-cta:hover { background: var(--terracotta) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 70vh;
+    padding-top: 80px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--sand);
+  }
+  .hero-left {
+    padding: 100px 64px 80px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .page-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .page-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--terracotta); }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--dark); margin-bottom: 8px;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    font-style: italic; color: var(--moss);
+    margin-bottom: 32px; font-weight: 300;
+  }
+  .hero-intro {
+    font-size: 1rem; line-height: 1.8; color: var(--mid);
+    font-weight: 300; max-width: 440px;
+  }
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #C8BAA0 0%, #A8967A 100%);
+    display: flex; align-items: flex-end; padding: 48px;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 40% 30%, rgba(196,113,74,0.15) 0%, transparent 60%);
+  }
+  .foto-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .hero-tag-box {
+    background: rgba(250,248,244,0.92); backdrop-filter: blur(8px);
+    padding: 20px 28px; position: relative; z-index: 1;
+    border-left: 3px solid var(--terracotta);
+  }
+  .hero-tag-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic; color: var(--dark);
+    line-height: 1.5;
+  }
+  .hero-tag-box span {
+    display: block; margin-top: 8px;
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid);
+  }
+
+  /* VERHAAL */
+  .verhaal {
+    padding: 100px 80px;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start;
+  }
+  .verhaal-nav {
+    position: sticky; top: 120px;
+  }
+  .verhaal-nav-label {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 24px; display: block;
+  }
+  .verhaal-nav ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .verhaal-nav a {
+    font-size: 0.88rem; color: var(--mid); text-decoration: none;
+    padding: 8px 0; display: block;
+    border-left: 2px solid rgba(74,90,58,0.15);
+    padding-left: 16px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .verhaal-nav a:hover { color: var(--terracotta); border-left-color: var(--terracotta); }
+  .verhaal-content {}
+  .verhaal-block { margin-bottom: 64px; }
+  .verhaal-block:last-child { margin-bottom: 0; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 16px; display: block; }
+  .verhaal-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 24px;
+  }
+  .verhaal-block h2 em { font-style: italic; color: var(--moss); }
+  .verhaal-block p {
+    font-size: 0.95rem; line-height: 1.85; color: var(--mid);
+    font-weight: 300; margin-bottom: 20px;
+  }
+  .verhaal-block p:last-child { margin-bottom: 0; }
+  .verhaal-block strong { color: var(--dark); font-weight: 500; }
+
+  /* OPLEIDING */
+  .opleiding {
+    padding: 100px 80px;
+    background: var(--dark); color: white;
+  }
+  .opleiding h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; color: white; margin-bottom: 64px;
+  }
+  .opleiding-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    margin-bottom: 64px;
+  }
+  .opleiding-item {
+    padding: 40px 32px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+  .opleiding-item:hover { background: rgba(255,255,255,0.03); }
+  .opleiding-jaar {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 12px; display: block;
+  }
+  .opleiding-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: white; font-weight: 400; margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .opleiding-item p {
+    font-size: 0.82rem; color: rgba(255,255,255,0.4);
+    font-weight: 300; line-height: 1.6;
+  }
+  .vakgebieden { display: flex; flex-wrap: wrap; gap: 8px; }
+  .vak-tag {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    padding: 6px 14px; border-radius: 100px;
+    text-transform: uppercase;
+  }
+
+  /* WAARDEN */
+  .waarden {
+    padding: 100px 80px;
+    background: var(--warm-white);
+  }
+  .waarden-header { margin-bottom: 64px; }
+  .waarden-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 16px;
+  }
+  .waarden-header p { font-size: 0.95rem; color: var(--mid); font-weight: 300; line-height: 1.75; max-width: 520px; }
+  .waarden-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .waarde-card {
+    background: var(--sand); padding: 40px 32px;
+    border-radius: 2px; position: relative; overflow: hidden;
+  }
+  .waarde-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: rgba(74,90,58,0.08); line-height: 1;
+    position: absolute; top: 16px; right: 24px;
+  }
+  .waarde-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; margin-bottom: 12px; color: var(--dark);
+  }
+  .waarde-card p { font-size: 0.85rem; line-height: 1.7; color: var(--mid); font-weight: 300; }
+
+  /* RECENSIES */
+  .recensies {
+    padding: 100px 80px;
+    background: var(--sand);
+  }
+  .recensies-header { text-align: center; margin-bottom: 64px; }
+  .recensies-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; margin-bottom: 12px; }
+  .recensies-header p { font-size: 0.9rem; color: var(--mid); font-weight: 300; }
+  .recensies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+  .recensie-card { background: white; padding: 40px 36px; border-radius: 2px; position: relative; }
+  .recensie-card::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--terracotta); opacity: 0.15; position: absolute; top: 10px; left: 28px; line-height: 1; }
+  .recensie-card p { font-size: 0.9rem; line-height: 1.75; color: var(--mid); font-weight: 300; margin-bottom: 24px; margin-top: 16px; }
+  .recensie-naam { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--moss); font-weight: 500; }
+  .recensie-context { font-size: 0.72rem; color: rgba(90,90,74,0.5); display: block; margin-top: 4px; }
+  .recensies-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* CONTACT */
+  .contact {
+    padding: 100px 80px;
+    background: var(--warm-white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .contact-info {}
+  .contact-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    font-weight: 300; line-height: 1.15; margin-bottom: 24px;
+  }
+  .contact-info h2 em { font-style: italic; color: var(--moss); }
+  .contact-info p { font-size: 0.95rem; line-height: 1.8; color: var(--mid); font-weight: 300; margin-bottom: 40px; }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 24px; background: var(--sand); border-radius: 2px;
+  }
+  .contact-detail-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .contact-detail-text {}
+  .contact-detail-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 4px; display: block; }
+  .contact-detail-value { font-size: 0.9rem; color: var(--dark); }
+  .contact-detail-value a { color: var(--moss); text-decoration: none; }
+  .contact-detail-value a:hover { color: var(--terracotta); }
+
+  /* FORMULIER */
+  .contact-form {
+    background: var(--sand);
+    padding: 56px 48px; border-radius: 2px;
+  }
+  .contact-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400; margin-bottom: 8px;
+  }
+  .contact-form .form-sub { font-size: 0.85rem; color: var(--mid); font-weight: 300; margin-bottom: 40px; }
+  .form-group { margin-bottom: 24px; }
+  .form-group label {
+    display: block; font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid); margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%; padding: 14px 18px;
+    background: white; border: 1px solid rgba(74,90,58,0.15);
+    border-radius: 2px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--dark);
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none; border-color: var(--moss);
+  }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .btn-submit {
+    width: 100%; background: var(--moss); color: white;
+    padding: 16px 32px; font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; border: none; border-radius: 2px;
+    cursor: pointer; transition: background 0.2s; font-family: 'DM Sans', sans-serif;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { background: var(--terracotta); }
+  .form-note { font-size: 0.75rem; color: rgba(90,90,74,0.5); text-align: center; margin-top: 16px; }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: rgba(255,255,255,0.4); padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; letter-spacing: 0.06em; }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: var(--clay); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .page-label { animation: fadeUp 0.6s 0.1s both; }
+  h1 { animation: fadeUp 0.6s 0.2s both; }
+  .hero-sub { animation: fadeUp 0.6s 0.3s both; }
+  .hero-intro { animation: fadeUp 0.6s 0.4s both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 24px; }
+    .hero-right { height: 280px; }
+    .verhaal { grid-template-columns: 1fr; padding: 60px 24px; }
+    .verhaal-nav { position: static; margin-bottom: 40px; }
+    .opleiding { padding: 60px 24px; }
+    .opleiding-grid { grid-template-columns: 1fr; }
+    .waarden { padding: 60px 24px; }
+    .waarden-grid { grid-template-columns: 1fr; }
+    .recensies { padding: 60px 24px; }
+    .recensies-grid { grid-template-columns: 1fr; }
+    .recensies-row2 { grid-template-columns: 1fr; }
+    .contact { grid-template-columns: 1fr; padding: 60px 24px; }
+    .contact-form { padding: 40px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Annemarie Bosman</a>
+  <ul class="nav-links">
+    <li><a href="vitaliteit.html">Vitaliteit</a></li>
+    <li><a href="vermogen.html">Vermogen</a></li>
+    <li><a href="vrijheid.html">Vrijheid</a></li>
+    <li><a href="over.html" class="active">Over mij</a></li>
+    <li><a href="#contact" class="nav-cta">Kennismaken</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="page-label">Over mij</div>
+    <h1>Annemarie<br>Bosman</h1>
+    <div class="hero-sub">Coach · Therapeut · Onderzoeker</div>
+    <p class="hero-intro">
+      Ik werk vanuit een diepe overtuiging: het menselijk lichaam is intelligent,
+      veerkrachtig en in staat tot herstel — als we het de juiste omstandigheden geven.
+    </p>
+  </div>
+  <div class="hero-right">
+    <div class="foto-placeholder">[ foto Annemarie ]</div>
+    <div class="hero-tag-box">
+      <p>"Mijn passie is mensen bewust te maken van hun eigen leiderschap in gezondheid, vitaliteit en levensgeluk."</p>
+      <span>— Annemarie Bosman</span>
+    </div>
+  </div>
+</section>
+
+<!-- VERHAAL -->
+<section class="verhaal">
+  <div class="verhaal-nav">
+    <span class="verhaal-nav-label">Op deze pagina</span>
+    <ul>
+      <li><a href="#mijn-verhaal">Mijn verhaal</a></li>
+      <li><a href="#aanpak">Mijn aanpak</a></li>
+      <li><a href="#onderzoek">Onderzoek</a></li>
+      <li><a href="#opleiding">Opleiding</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="verhaal-content">
+
+    <div class="verhaal-block" id="mijn-verhaal">
+      <span class="section-label">Het begin</span>
+      <h2>Een grote <em>liefde</em> voor de mens</h2>
+      <p>
+        Mijn werk begon met een eenvoudige maar diepe overtuiging: mensen zijn niet kapot,
+        ze zijn uit balans. De symptomen die zo velen van ons kennen — vermoeidheid,
+        buikklachten, een wazig hoofd, hormonen die ons in de steek laten — zijn geen
+        tekenen van zwakte. Het zijn <strong>signalen van een lichaam dat om aandacht vraagt</strong>.
+      </p>
+      <p>
+        Als coach, therapeut en onderzoeker heb ik me gespecialiseerd in precies die signalen.
+        Ik leer mensen ze te horen, te begrijpen en te beantwoorden — niet met een
+        standaard protocol, maar met echte aandacht voor wie jij bent.
+      </p>
+    </div>
+
+    <div class="verhaal-block" id="aanpak">
+      <span class="section-label">De methode</span>
+      <h2>Vitaliteit · Vermogen · <em>Vrijheid</em></h2>
+      <p>
+        Mijn aanpak rust op drie pijlers die ik door de jaren heen heb ontwikkeld.
+        <strong>Vitaliteit</strong> begint in het lichaam: het microbioom, voeding, hormonen.
+        <strong>Vermogen</strong> volgt in het brein: helderheid, focus, eigenaarschap.
+        <strong>Vrijheid</strong> is het resultaat: een leven dat écht van jou is.
+      </p>
+      <p>
+        Ik werk vanuit de functionele geneeskunde, de klinische Psycho Neuro Immunologie (kPNI)
+        en de nieuwste inzichten uit de epigenetica en nutrogenomics. Maar bovenal werk ik
+        vanuit <strong>oprechte interesse in jou als mens</strong>.
+      </p>
+    </div>
+
+    <div class="verhaal-block" id="onderzoek">
+      <span class="section-label">Wetenschap</span>
+      <h2>Op het snijvlak van <em>wetenschap en leven</em></h2>
+      <p>
+        Ik doe actief wetenschappelijk onderzoek naar Ancestral and Functional Nutrition —
+        de vraag hoe onze evolutionaire achtergrond ons voedingspatroon en onze gezondheid
+        bepaalt. Dit onderzoek vormt de wetenschappelijke ruggengraat van mijn praktijk.
+      </p>
+      <p>
+        Mijn werk staat voorop in wetenschappelijke innovatie op het gebied van gezondheid
+        en geneeskunde. De Magische Driehoek van Bodem, Buik en Brein is mijn centrale
+        thema: <strong>onze gezondheid begint niet in de apotheek, maar in de aarde onder onze voeten</strong>.
+      </p>
+      <p>
+        Momenteel werk ik ook aan de integratie van Web3-technologie in gezondheidszorg —
+        specifiek aan de vraag hoe mensen eigenaarschap kunnen nemen over hun eigen
+        gezondheidsdata via de blockchain.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- OPLEIDING -->
+<section class="opleiding" id="opleiding">
+  <h2>Opleiding & achtergrond</h2>
+  <div class="opleiding-grid">
+    <div class="opleiding-item">
+      <span class="opleiding-jaar">Huidig</span>
+      <h3>Wetenschappelijk onderzoek Ancestral & Functional Nutrition</h3>
+      <p>Actief onderzoek naar de relatie tussen evolutionaire voeding, het microbioom en chronische gezondheidsklachten.</p>
+    </div>
+    <div class="opleiding-item">
+      <span class="opleiding-jaar">Toegepast</span>
+      <h3>Klinische Psycho Neuro Immunologie (kPNI)</h3>
+      <p>De wetenschap van de verbinding tussen psyche, zenuwstelsel, hormonen en immuunsysteem — toegepast in de praktijk.</p>
+    </div>
+    <div class="opleiding-item">
+      <span class="opleiding-jaar">Certified</span>
+      <h3>Mindfulness Based Cognitive Therapy (MBCT)</h3>
+      <p>Gecertificeerde MBCT-therapeut. Mindfulness als wetenschappelijk onderbouwde methode voor mentaal herstel.</p>
+    </div>
+    <div class="opleiding-item">
+      <span class="opleiding-jaar">Specialisatie</span>
+      <h3>Nutrogenomics & Epigenetica</h3>
+      <p>Hoe voeding en leefstijl onze genen beïnvloeden — en hoe we dat kunnen inzetten voor gezondheid en preventie.</p>
+    </div>
+    <div class="opleiding-item">
+      <span class="opleiding-jaar">Specialisatie</span>
+      <h3>Vrouwenbrein & Hormonale gezondheid</h3>
+      <p>Specifieke expertise in de hormonale levensfases van vrouwen: cyclus, zwangerschap, perimenopauze en menopauze.</p>
+    </div>
+    <div class="opleiding-item">
+      <span class="opleiding-jaar">Passie</span>
+      <h3>Blue Zone leefstijl & Longevity</h3>
+      <p>Studie naar de leefgewoonten van de langstlevende bevolkingsgroepen ter wereld en hoe we die kunnen toepassen.</p>
+    </div>
+  </div>
+  <div class="vakgebieden">
+    <span class="vak-tag">Microbioom</span>
+    <span class="vak-tag">kPNI</span>
+    <span class="vak-tag">Epigenetica</span>
+    <span class="vak-tag">Nutrogenomics</span>
+    <span class="vak-tag">MBCT</span>
+    <span class="vak-tag">Functionele geneeskunde</span>
+    <span class="vak-tag">Vrouwenbrein</span>
+    <span class="vak-tag">Blue Zones</span>
+    <span class="vak-tag">Web3 & Gezondheid</span>
+  </div>
+</section>
+
+<!-- WAARDEN -->
+<section class="waarden">
+  <div class="waarden-header">
+    <span class="section-label">Waar ik voor sta</span>
+    <h2>Mijn waarden</h2>
+    <p>Dit zijn de principes die alles wat ik doe sturen — van mijn onderzoek tot mijn gesprekken met cliënten.</p>
+  </div>
+  <div class="waarden-grid">
+    <div class="waarde-card">
+      <div class="waarde-num">01</div>
+      <h3>Eigenaarschap</h3>
+      <p>Jij bent de baas over je eigen gezondheid. Ik geef je de kennis en tools om dat eigenaarschap ook écht te nemen — niet afhankelijk te zijn van anderen.</p>
+    </div>
+    <div class="waarde-card">
+      <div class="waarde-num">02</div>
+      <h3>Wetenschap met hart</h3>
+      <p>Ik werk altijd vanuit de nieuwste wetenschap — maar nooit ten koste van menselijkheid. Jij bent geen protocol, maar een persoon.</p>
+    </div>
+    <div class="waarde-card">
+      <div class="waarde-num">03</div>
+      <h3>Vrijheid als doel</h3>
+      <p>Gezondheid is geen doel op zich. Het is de basis voor een leven dat echt van jou is — vol energie, vreugde en verbinding.</p>
+    </div>
+    <div class="waarde-card">
+      <div class="waarde-num">04</div>
+      <h3>Lokaal & eerlijk</h3>
+      <p>Van voeding tot technologie: ik kies voor wat dicht bij huis is, eerlijk is geproduceerd en bijdraagt aan een betere wereld.</p>
+    </div>
+    <div class="waarde-card">
+      <div class="waarde-num">05</div>
+      <h3>Verbinding</h3>
+      <p>Gezondheid gedijt in gemeenschap. Ik geloof in samen leren, samen eten, samen groeien — of dat nu fysiek is of digitaal.</p>
+    </div>
+    <div class="waarde-card">
+      <div class="waarde-num">06</div>
+      <h3>Innovatie</h3>
+      <p>De toekomst van gezondheid is gedecentraliseerd, persoonlijk en transparant. Web3 en blockchain geven daar invulling aan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RECENSIES -->
+<section class="recensies">
+  <div class="recensies-header">
+    <span class="section-label" style="color:var(--terracotta)">Ervaringen</span>
+    <h2>Wat anderen zeggen</h2>
+    <p>Echte verhalen van mensen die de overstap maakten van uitgeput naar vrij</p>
+  </div>
+  <div class="recensies-grid">
+    <div class="recensie-card">
+      <p>Na een korte periode kon ik haar melden dat een deel van mijn klachten voor 90% waren verdwenen. Een beter resultaat dan ik durfde te dromen.</p>
+      <span class="recensie-naam">Ezra Pronk</span>
+      <span class="recensie-context">Microbioomtherapie 1-op-1</span>
+    </div>
+    <div class="recensie-card">
+      <p>Ik stond versteld van de accuratesse van de resultaten. De supplementen vangen op natuurlijke wijze de ergste dalen op — ik ben heel erg tevreden met het resultaat.</p>
+      <span class="recensie-naam">Judith H.</span>
+      <span class="recensie-context">Analyse & Advies</span>
+    </div>
+    <div class="recensie-card">
+      <p>Ik volg het basismenu nu drie maanden en ben helemaal klachtenvrij. We volgen nu met het hele gezin deze manier van eten en het bevalt ons prima.</p>
+      <span class="recensie-naam">Hilde van Schijndel</span>
+      <span class="recensie-context">Microbioom Reset</span>
+    </div>
+  </div>
+  <div class="recensies-row2" style="margin-top:24px;">
+    <div class="recensie-card">
+      <p>Annemarie heeft een bijzondere gave om complexe wetenschappelijke inzichten te vertalen naar praktisch en begrijpelijk advies. Haar betrokkenheid en kennis zijn indrukwekkend.</p>
+      <span class="recensie-naam">Marianne de Jong</span>
+      <span class="recensie-context">Breinoptimalisatie coaching</span>
+    </div>
+    <div class="recensie-card">
+      <p>Eindelijk iemand die naar het geheel kijkt en niet alleen naar de symptomen. Na jaren van zoeken voel ik me voor het eerst echt begrepen en geholpen.</p>
+      <span class="recensie-naam">Sandra K.</span>
+      <span class="recensie-context">Microbioomtherapie 1-op-1</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <span class="section-label">Laten we kennismaken</span>
+    <h2>Klaar voor een <em>goed gesprek</em>?</h2>
+    <p>
+      Een kennismaking is altijd gratis en vrijblijvend. We bespreken waar jij staat,
+      wat jij zoekt en of er een klik is. Geen verkooppraatje, geen druk — gewoon
+      een eerlijk gesprek.
+    </p>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        <div class="contact-detail-text">
+          <span class="contact-detail-label">E-mail</span>
+          <div class="contact-detail-value">
+            <a href="mailto:annbosman@live.nl">annbosman@live.nl</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">🌐</div>
+        <div class="contact-detail-text">
+          <span class="contact-detail-label">Website</span>
+          <div class="contact-detail-value">annemariebosman.nl</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <span class="contact-detail-label">Werkgebied</span>
+          <div class="contact-detail-value">Nederland · Online & op locatie</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">🔗</div>
+        <div class="contact-detail-text">
+          <span class="contact-detail-label">Web3 & ICP</span>
+          <div class="contact-detail-value">Binnenkort ook op de blockchain</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <h3>Stuur een bericht</h3>
+    <p class="form-sub">Ik reageer binnen 2 werkdagen.</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="naam">Voornaam</label>
+        <input type="text" id="naam" placeholder="Jouw voornaam">
+      </div>
+      <div class="form-group">
+        <label for="achternaam">Achternaam</label>
+        <input type="text" id="achternaam" placeholder="Jouw achternaam">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">E-mailadres</label>
+      <input type="email" id="email" placeholder="jouw@email.nl">
+    </div>
+    <div class="form-group">
+      <label for="interesse">Ik ben geïnteresseerd in</label>
+      <select id="interesse">
+        <option value="">Kies een onderwerp...</option>
+        <option>Microbioomtherapie 1-op-1</option>
+        <option>Microbioom Reset (groep)</option>
+        <option>Breinoptimalisatie coaching</option>
+        <option>Local Dolce Vita foodclub</option>
+        <option>Web3 & gezondheid platform</option>
+        <option>Algemene vraag</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="bericht">Jouw verhaal (optioneel)</label>
+      <textarea id="bericht" placeholder="Waar loop jij tegenaan? Wat zoek je? Deel gerust..."></textarea>
+    </div>
+    <button class="btn-submit">Verstuur bericht</button>
+    <p class="form-note">Je gegevens worden vertrouwelijk behandeld en nooit gedeeld met derden.</p>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 Annemarie Bosman · <a href="#">Disclaimer</a> · <a href="#">Algemene Voorwaarden</a> · <a href="#">Privacy</a></div>
+  <div>Ontwerp door <a href="#">Studio Fingerspitzengefühl</a></div>
+</footer>
+
+</body>
+</html>

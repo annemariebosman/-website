@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitaliteit – Annemarie Bosman</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sand: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --moss: #4A5A3A;
+    --sage: #7A8F6A;
+    --terracotta: #C4714A;
+    --clay: #D4956A;
+    --dark: #1E2018;
+    --mid: #5A5A4A;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--dark); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,248,244,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: 0.05em; color: var(--moss); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+  .nav-cta { background: var(--moss); color: white !important; padding: 10px 22px; border-radius: 2px; }
+  .nav-cta:hover { background: var(--terracotta) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--sand);
+  }
+  .hero-left {
+    padding: 100px 64px 80px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .breadcrumb {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 32px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .breadcrumb a { color: var(--mid); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--terracotta); }
+  .breadcrumb span { color: var(--terracotta); }
+  .pijler-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pijler-label::before { content: '01'; font-size: 0.65rem; opacity: 0.5; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5.5vw, 6rem);
+    font-weight: 300; line-height: 1;
+    color: var(--dark); margin-bottom: 8px;
+  }
+  .hero-sub-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-style: italic; color: var(--moss);
+    margin-bottom: 36px; font-weight: 300;
+  }
+  .hero-intro {
+    font-size: 1rem; line-height: 1.8; color: var(--mid);
+    font-weight: 300; max-width: 440px; margin-bottom: 48px;
+  }
+  .hero-ctas { display: flex; gap: 16px; align-items: center; }
+  .btn-primary { background: var(--moss); color: white; padding: 14px 32px; font-size: 0.85rem; letter-spacing: 0.06em; text-decoration: none; border-radius: 2px; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--terracotta); }
+  .btn-ghost { color: var(--moss); font-size: 0.85rem; text-decoration: none; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--moss); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .btn-ghost:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #D4C9B5 0%, #B8A98A 60%, #9A8B70 100%);
+    display: flex; align-items: flex-end; justify-content: flex-start;
+    padding: 48px;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 40% 30%, rgba(196,113,74,0.2) 0%, transparent 65%);
+  }
+  .hero-stat-box {
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(8px);
+    padding: 28px 32px;
+    max-width: 260px;
+    border-left: 3px solid var(--terracotta);
+    position: relative; z-index: 1;
+  }
+  .hero-stat-box .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--moss); line-height: 1;
+  }
+  .hero-stat-box .stat-label {
+    font-size: 0.8rem; color: var(--mid); font-weight: 300;
+    line-height: 1.5; margin-top: 8px;
+  }
+
+  /* INTRO BLOK */
+  .intro-blok {
+    padding: 100px 80px;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+    align-items: start;
+  }
+  .intro-blok-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; line-height: 1.2;
+    color: var(--moss);
+  }
+  .intro-blok-right p {
+    font-size: 1.05rem; line-height: 1.85; color: var(--mid);
+    font-weight: 300; margin-bottom: 24px;
+  }
+  .intro-blok-right p:last-child { margin-bottom: 0; }
+  .intro-blok-right strong { color: var(--dark); font-weight: 500; }
+
+  /* VIJF PRINCIPES */
+  .principes {
+    padding: 80px;
+    background: var(--dark);
+  }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 20px; display: block;
+  }
+  .principes h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; color: white; margin-bottom: 64px;
+    max-width: 500px; line-height: 1.2;
+  }
+  .principes-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+  }
+  .principe-item {
+    padding: 40px 32px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .principe-item:hover { background: rgba(255,255,255,0.04); }
+  .principe-item::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--terracotta);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .principe-item:hover::after { transform: scaleX(1); }
+  .principe-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300;
+    color: rgba(255,255,255,0.07); line-height: 1;
+    margin-bottom: 24px; display: block;
+  }
+  .principe-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: white; font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .principe-text {
+    font-size: 0.82rem; line-height: 1.7;
+    color: rgba(255,255,255,0.45); font-weight: 300;
+  }
+
+  /* PROGRAMMA'S */
+  .programmas {
+    padding: 100px 80px;
+    background: var(--warm-white);
+  }
+  .programmas-header {
+    margin-bottom: 64px;
+  }
+  .programmas-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 16px;
+  }
+  .programmas-header p {
+    font-size: 0.95rem; color: var(--mid); font-weight: 300;
+    line-height: 1.75; max-width: 520px;
+  }
+  .programmas-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .programma-card {
+    background: var(--sand);
+    padding: 48px 40px;
+    border-radius: 2px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform 0.3s;
+  }
+  .programma-card:hover { transform: translateY(-4px); }
+  .programma-card.featured {
+    background: var(--moss); color: white;
+  }
+  .programma-badge {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    background: var(--terracotta); color: white;
+    padding: 4px 12px; border-radius: 100px;
+    display: inline-block; margin-bottom: 32px;
+    align-self: flex-start;
+  }
+  .programma-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400; margin-bottom: 8px;
+  }
+  .programma-card.featured h3 { color: white; }
+  .programma-duur {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 24px; display: block;
+  }
+  .programma-card.featured .programma-duur { color: rgba(255,255,255,0.5); }
+  .programma-card p {
+    font-size: 0.9rem; line-height: 1.75; color: var(--mid);
+    font-weight: 300; margin-bottom: 32px; flex: 1;
+  }
+  .programma-card.featured p { color: rgba(255,255,255,0.65); }
+  .programma-includes {
+    list-style: none; display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 36px;
+  }
+  .programma-includes li {
+    font-size: 0.82rem; color: var(--mid); font-weight: 300;
+    display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
+  }
+  .programma-card.featured .programma-includes li { color: rgba(255,255,255,0.6); }
+  .programma-includes li::before {
+    content: '✓'; color: var(--terracotta); font-size: 0.85rem; flex-shrink: 0;
+  }
+  .programma-card.featured .programma-includes li::before { color: var(--clay); }
+  .btn-card {
+    background: var(--moss); color: white;
+    padding: 14px 28px; font-size: 0.82rem;
+    letter-spacing: 0.06em; text-decoration: none;
+    border-radius: 2px; text-align: center;
+    transition: background 0.2s; display: block;
+  }
+  .btn-card:hover { background: var(--terracotta); }
+  .programma-card.featured .btn-card {
+    background: white; color: var(--moss);
+  }
+  .programma-card.featured .btn-card:hover {
+    background: var(--sand);
+  }
+
+  /* WETENSCHAP */
+  .wetenschap {
+    padding: 100px 80px;
+    background: var(--sand);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .wetenschap-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 28px;
+  }
+  .wetenschap-content h2 em { font-style: italic; color: var(--moss); }
+  .wetenschap-content p {
+    font-size: 0.95rem; line-height: 1.8; color: var(--mid);
+    font-weight: 300; margin-bottom: 20px;
+  }
+  .vakgebieden {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0 40px;
+  }
+  .vak-tag {
+    background: white; color: var(--moss);
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    padding: 6px 14px; border-radius: 100px;
+    text-transform: uppercase;
+  }
+  .wetenschap-quote {
+    background: var(--dark); color: white;
+    padding: 56px 48px; border-radius: 2px;
+    position: relative; overflow: hidden;
+  }
+  .wetenschap-quote::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem; font-weight: 300;
+    color: rgba(255,255,255,0.05);
+    position: absolute; top: -10px; left: 24px;
+    line-height: 1;
+  }
+  .wetenschap-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300;
+    font-style: italic; line-height: 1.5;
+    color: white; margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+  .wetenschap-quote cite {
+    font-size: 0.75rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay);
+    font-style: normal;
+  }
+
+  /* CTA */
+  .cta-blok {
+    padding: 100px 80px;
+    background: var(--moss); color: white;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center;
+  }
+  .cta-blok h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 300; line-height: 1.15; color: white;
+  }
+  .cta-blok h2 em { font-style: italic; color: var(--clay); }
+  .cta-right p {
+    font-size: 0.95rem; line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300; margin-bottom: 36px;
+  }
+  .btn-white {
+    background: white; color: var(--moss);
+    padding: 16px 36px; font-size: 0.85rem;
+    letter-spacing: 0.06em; text-decoration: none;
+    border-radius: 2px; display: inline-block; transition: background 0.2s;
+  }
+  .btn-white:hover { background: var(--sand); }
+
+  /* NAV PIJLERS */
+  .pijler-nav {
+    padding: 32px 80px;
+    background: white;
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+    display: flex; gap: 0; align-items: stretch;
+  }
+  .pijler-nav a {
+    flex: 1; padding: 20px 32px;
+    text-align: center; text-decoration: none;
+    border-right: 1px solid rgba(74,90,58,0.1);
+    transition: background 0.2s;
+  }
+  .pijler-nav a:last-child { border-right: none; }
+  .pijler-nav a:hover { background: var(--sand); }
+  .pijler-nav a.active { background: var(--sand); }
+  .pijler-nav .pijler-num {
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--terracotta);
+    display: block; margin-bottom: 4px;
+  }
+  .pijler-nav .pijler-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--dark); font-weight: 400;
+  }
+  .pijler-nav .pijler-sub {
+    font-size: 0.72rem; color: var(--mid); font-weight: 300;
+    display: block; margin-top: 2px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); color: rgba(255,255,255,0.4);
+    padding: 48px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; letter-spacing: 0.06em;
+  }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: var(--clay); }
+
+  /* ANIMATIES */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .pijler-label { animation: fadeUp 0.6s 0.1s both; }
+  h1             { animation: fadeUp 0.6s 0.2s both; }
+  .hero-sub-title { animation: fadeUp 0.6s 0.3s both; }
+  .hero-intro    { animation: fadeUp 0.6s 0.4s both; }
+  .hero-ctas     { animation: fadeUp 0.6s 0.5s both; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 24px; }
+    .hero-right { height: 300px; }
+    .pijler-nav { padding: 0 0; overflow-x: auto; }
+    .pijler-nav a { padding: 16px 20px; min-width: 140px; }
+    .intro-blok { grid-template-columns: 1fr; padding: 60px 24px; gap: 32px; }
+    .principes { padding: 60px 24px; }
+    .principes-grid { grid-template-columns: 1fr 1fr; }
+    .programmas { padding: 60px 24px; }
+    .programmas-grid { grid-template-columns: 1fr; }
+    .wetenschap { grid-template-columns: 1fr; padding: 60px 24px; }
+    .cta-blok { grid-template-columns: 1fr; padding: 60px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Annemarie Bosman</a>
+  <ul class="nav-links">
+    <li><a href="vitaliteit.html" class="active">Vitaliteit</a></li>
+    <li><a href="vermogen.html">Vermogen</a></li>
+    <li><a href="vrijheid.html">Vrijheid</a></li>
+    <li><a href="over.html">Over mij</a></li>
+    <li><a href="over.html#contact" class="nav-cta">Kennismaken</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> › <span>Vitaliteit</span>
+    </div>
+    <div class="pijler-label">Pijler 01</div>
+    <h1>Vitaliteit</h1>
+    <div class="hero-sub-title">Het lichaam als fundament</div>
+    <p class="hero-intro">
+      Alles begint in je buik. Je microbioom stuurt je hormonen,
+      je immuunsysteem, je stemming en je energie. Als de basis
+      goed zit, stroomt de rest vanzelf.
+    </p>
+    <div class="hero-ctas">
+      <a href="#programmas" class="btn-primary">Bekijk de programma's</a>
+      <a href="#uitleg" class="btn-ghost">Hoe werkt het? →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-box">
+      <div class="stat-num">38+</div>
+      <div class="stat-label">biljoen micro-organismen leven er in en op jouw lichaam — elk met een eigen rol</div>
+    </div>
+  </div>
+</section>
+
+<!-- PIJLER NAV -->
+<div class="pijler-nav">
+  <a href="vitaliteit.html" class="active">
+    <span class="pijler-num">01</span>
+    <span class="pijler-name">Vitaliteit</span>
+    <span class="pijler-sub">Lichaam & microbioom</span>
+  </a>
+  <a href="vermogen.html">
+    <span class="pijler-num">02</span>
+    <span class="pijler-name">Vermogen</span>
+    <span class="pijler-sub">Brein & eigenaarschap</span>
+  </a>
+  <a href="vrijheid.html">
+    <span class="pijler-num">03</span>
+    <span class="pijler-name">Vrijheid</span>
+    <span class="pijler-sub">Leefstijl & leven</span>
+  </a>
+</div>
+
+<!-- INTRO -->
+<section class="intro-blok" id="uitleg">
+  <div class="intro-blok-left">
+    <h2>Waarom het microbioom alles verandert</h2>
+  </div>
+  <div class="intro-blok-right">
+    <p>
+      Je microbioom is een universum van bacteriën, schimmels en virussen dat het leven op aarde al
+      miljarden jaren lang draagt. Het is <strong>ouder en intelligenter dan ons brein</strong> — en
+      toch negeren we het systematisch met onze moderne leefstijl.
+    </p>
+    <p>
+      Verstoringen in het microbioom liggen aan de basis van vermoeidheid, hormonale klachten,
+      stemmingsproblemen, een wazig hoofd en een onrustige buik. Niet als symptoom, maar als
+      <strong>oorzaak</strong>. Herstel je de diversiteit, dan herstel je de mens.
+    </p>
+    <p>
+      Mijn werk is gebaseerd op de nieuwste wetenschappelijke inzichten uit de klinische
+      Psycho Neuro Immunologie (kPNI), nutrogenomics en epigenetica — vertaald naar
+      wat jouw lichaam op dit moment nodig heeft.
+    </p>
+  </div>
+</section>
+
+<!-- VIJF PRINCIPES -->
+<section class="principes">
+  <span class="section-label">De methode</span>
+  <h2>Vijf essentiële principes voor gezondheid en geluk</h2>
+  <div class="principes-grid">
+    <div class="principe-item">
+      <span class="principe-num">1</span>
+      <div class="principe-title">Voeding</div>
+      <p class="principe-text">Pure, lokale en seizoensgebonden voeding als basis. Eten van dichtbij is het nieuwe luxe.</p>
+    </div>
+    <div class="principe-item">
+      <span class="principe-num">2</span>
+      <div class="principe-title">Beweging</div>
+      <p class="principe-text">Bewegen zoals je lichaam het bedoeld heeft — functioneel, gevarieerd en met plezier.</p>
+    </div>
+    <div class="principe-item">
+      <span class="principe-num">3</span>
+      <div class="principe-title">Slaap</div>
+      <p class="principe-text">Herstel begint 's nachts. De kwaliteit van je slaap bepaalt de kwaliteit van je dag.</p>
+    </div>
+    <div class="principe-item">
+      <span class="principe-num">4</span>
+      <div class="principe-title">Stress</div>
+      <p class="principe-text">Chronische stress is de grootste vijand van je microbioom. Leren reguleren is een vaardigheid.</p>
+    </div>
+    <div class="principe-item">
+      <span class="principe-num">5</span>
+      <div class="principe-title">Verbinding</div>
+      <p class="principe-text">Sociale en ecologische verbinding — met mensen, natuur en voedsel — is biologisch noodzakelijk.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMMA'S -->
+<section class="programmas" id="programmas">
+  <div class="programmas-header">
+    <span class="section-label" style="color:var(--terracotta)">Hoe ik werk</span>
+    <h2>Kies jouw pad naar vitaliteit</h2>
+    <p>Ieder lichaam is anders. Daarom werk ik altijd op maat — met jouw situatie, jouw tempo en jouw doelen als uitgangspunt.</p>
+  </div>
+  <div class="programmas-grid">
+
+    <div class="programma-card">
+      <span class="programma-badge">Groep</span>
+      <h3>Microbioom Reset</h3>
+      <span class="programma-duur">6 weken · groepsprogramma</span>
+      <p>Een intensief groepsprogramma waarin je samen met anderen leert hoe je je microbioom reset en je gezondheid van binnenuit herstelt.</p>
+      <ul class="programma-includes">
+        <li>Wekelijkse groepssessies</li>
+        <li>Persoonlijk voedingsplan</li>
+        <li>Suppletieadvies op maat</li>
+        <li>Community support</li>
+      </ul>
+      <a href="over.html#contact" class="btn-card">Meer informatie</a>
+    </div>
+
+    <div class="programma-card featured">
+      <span class="programma-badge">Aanbevolen</span>
+      <h3>Microbioom&shy;therapie</h3>
+      <span class="programma-duur">3 maanden · 1-op-1</span>
+      <p>Het meest uitgebreide traject. Drie maanden lang werk je samen met mij aan jouw gezondheid — brein, buik én hormonen — met begeleiding op maat.</p>
+      <ul class="programma-includes">
+        <li>Uitgebreide gezondheidsanalyse</li>
+        <li>Maandelijkse 1-op-1 sessies</li>
+        <li>Voeding & suppletie op maat</li>
+        <li>Epigenetische leefstijlanalyse</li>
+        <li>Doorlopende begeleiding per app</li>
+      </ul>
+      <a href="over.html#contact" class="btn-card">Gratis kennismaken</a>
+    </div>
+
+    <div class="programma-card">
+      <span class="programma-badge">Losse sessie</span>
+      <h3>Analyse & Advies</h3>
+      <span class="programma-duur">Eénmalig · 1-op-1</span>
+      <p>Een uitgebreide analyse van jouw gezondheidspatroon, gevolgd door een concreet en persoonlijk advies. Een krachtige eerste stap.</p>
+      <ul class="programma-includes">
+        <li>Uitgebreide vragenlijst & analyse</li>
+        <li>Persoonlijk gesprek (90 min)</li>
+        <li>Geschreven adviesrapport</li>
+        <li>Supplement- en voedingsadvies</li>
+      </ul>
+      <a href="over.html#contact" class="btn-card">Meer informatie</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- WETENSCHAP -->
+<section class="wetenschap">
+  <div class="wetenschap-content">
+    <span class="section-label" style="color:var(--terracotta)">De wetenschap</span>
+    <h2>Gebaseerd op de <em>nieuwste inzichten</em> uit de functionele geneeskunde</h2>
+    <p>
+      Ik doe actief wetenschappelijk onderzoek naar Ancestral and Functional Nutrition.
+      Mijn werk staat voorop in wetenschappelijke innovatie op het gebied van gezondheid
+      en geneeskunde.
+    </p>
+    <p>
+      De magische driehoek van Bodem, Buik en Brein vormt de kern van mijn aanpak:
+      onze gezondheid begint niet in de apotheek, maar in de aarde onder onze voeten.
+    </p>
+    <div class="vakgebieden">
+      <span class="vak-tag">Nutrogenomics</span>
+      <span class="vak-tag">kPNI</span>
+      <span class="vak-tag">Epigenetica</span>
+      <span class="vak-tag">Microbioom</span>
+      <span class="vak-tag">Functionele geneeskunde</span>
+    </div>
+    <a href="over.html" class="btn-primary">Meer over mijn achtergrond</a>
+  </div>
+  <div class="wetenschap-quote">
+    <blockquote>
+      "The doctor of the future will give no medicine, but will interest his patients in the care of the human frame, in diet, and in the cause and prevention of disease."
+    </blockquote>
+    <cite>— Thomas Edison</cite>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-blok">
+  <div class="cta-left">
+    <h2>Klaar om je <em>vitaliteit</em> terug te winnen?</h2>
+  </div>
+  <div class="cta-right">
+    <p>Begin met een gratis kennismaking. We kijken samen naar jouw situatie en welk pad het beste bij je past.</p>
+    <a href="over.html#contact" class="btn-white">Plan een gratis kennismaking</a>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 Annemarie Bosman · <a href="#">Disclaimer</a> · <a href="#">Algemene Voorwaarden</a> · <a href="#">Privacy</a></div>
+  <div>Ontwerp door <a href="#">Studio Fingerspitzengefühl</a></div>
+</footer>
+
+</body>
+</html>

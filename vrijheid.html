@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vrijheid – Annemarie Bosman</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sand: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --moss: #4A5A3A;
+    --sage: #7A8F6A;
+    --terracotta: #C4714A;
+    --clay: #D4956A;
+    --dark: #1E2018;
+    --mid: #5A5A4A;
+    --cream: #EDE6D6;
+    --gold: #B8965A;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,248,244,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: 0.05em; color: var(--moss); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+  .nav-cta { background: var(--moss); color: white !important; padding: 10px 22px; border-radius: 2px; }
+  .nav-cta:hover { background: var(--terracotta) !important; }
+
+  /* HERO — magazine, breed, luchtig */
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;
+    position: relative;
+    background: var(--cream);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #EDE6D6 0%, #D9CFBB 40%, #C8BAA0 100%);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(196,113,74,0.15) 0%, transparent 55%);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    padding: 0 80px 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
+  }
+  .breadcrumb {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 32px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .breadcrumb a { color: var(--mid); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--terracotta); }
+  .breadcrumb span { color: var(--terracotta); }
+  .pijler-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pijler-label::before { content: '03'; font-size: 0.65rem; opacity: 0.5; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(5rem, 10vw, 10rem);
+    font-weight: 300; line-height: 0.9;
+    color: var(--dark); letter-spacing: -0.02em;
+  }
+  .hero-right-content {
+    padding-bottom: 8px;
+  }
+  .hero-sub-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-style: italic; color: var(--moss);
+    margin-bottom: 24px; font-weight: 300;
+  }
+  .hero-intro {
+    font-size: 1rem; line-height: 1.8; color: var(--mid);
+    font-weight: 300; margin-bottom: 40px;
+  }
+  .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--moss); color: white; padding: 14px 32px; font-size: 0.85rem; letter-spacing: 0.06em; text-decoration: none; border-radius: 2px; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--terracotta); }
+  .btn-ghost { color: var(--moss); font-size: 0.85rem; text-decoration: none; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--moss); padding-bottom: 2px; transition: color 0.2s; }
+  .btn-ghost:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* PIJLER NAV */
+  .pijler-nav {
+    background: white; border-bottom: 1px solid rgba(74,90,58,0.1);
+    display: flex; gap: 0; align-items: stretch;
+  }
+  .pijler-nav a { flex: 1; padding: 24px 32px; text-align: center; text-decoration: none; border-right: 1px solid rgba(74,90,58,0.1); transition: background 0.2s; }
+  .pijler-nav a:last-child { border-right: none; }
+  .pijler-nav a:hover { background: var(--sand); }
+  .pijler-nav a.active { background: var(--sand); }
+  .pijler-num { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); display: block; margin-bottom: 4px; }
+  .pijler-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--dark); font-weight: 400; }
+  .pijler-sub { font-size: 0.72rem; color: var(--mid); font-weight: 300; display: block; margin-top: 2px; }
+
+  /* MAGAZINE INTRO */
+  .magazine-intro {
+    padding: 100px 80px;
+    display: grid; grid-template-columns: 2fr 1fr; gap: 80px; align-items: start;
+  }
+  .mag-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300; line-height: 1.25;
+    color: var(--dark); font-style: italic;
+  }
+  .mag-quote strong { font-style: normal; font-weight: 600; color: var(--moss); }
+  .mag-aside { padding-top: 8px; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 20px; display: block; }
+  .mag-aside p { font-size: 0.9rem; line-height: 1.8; color: var(--mid); font-weight: 300; }
+
+  /* LOCAL DOLCE VITA — editorial grid */
+  .ldv {
+    padding: 0 80px 100px;
+  }
+  .ldv-header {
+    padding: 64px 0 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+    border-top: 1px solid rgba(74,90,58,0.12);
+  }
+  .ldv-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300; line-height: 1.05; letter-spacing: -0.01em;
+  }
+  .ldv-header p { font-size: 0.9rem; line-height: 1.8; color: var(--mid); font-weight: 300; }
+  .ldv-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+  .ldv-card {
+    background: var(--sand);
+    padding: 40px 36px;
+    position: relative; overflow: hidden;
+  }
+  .ldv-card:nth-child(1) { grid-column: 1 / 8; }
+  .ldv-card:nth-child(2) { grid-column: 8 / 13; }
+  .ldv-card:nth-child(3) { grid-column: 1 / 5; }
+  .ldv-card:nth-child(4) { grid-column: 5 / 9; }
+  .ldv-card:nth-child(5) { grid-column: 9 / 13; }
+  .ldv-card .card-tag {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 20px; display: block;
+  }
+  .ldv-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400; margin-bottom: 12px; line-height: 1.2;
+  }
+  .ldv-card p { font-size: 0.85rem; line-height: 1.7; color: var(--mid); font-weight: 300; }
+  .ldv-card.featured { background: var(--moss); }
+  .ldv-card.featured .card-tag { color: var(--clay); }
+  .ldv-card.featured h3 { color: white; }
+  .ldv-card.featured p { color: rgba(255,255,255,0.6); }
+  .ldv-card .img-placeholder {
+    width: 100%; height: 180px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+    margin-bottom: 24px; border-radius: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(0,0,0,0.2);
+  }
+
+  /* BLUE ZONE */
+  .bluezone {
+    padding: 100px 80px;
+    background: var(--dark); color: white;
+    position: relative; overflow: hidden;
+  }
+  .bluezone::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 80%, rgba(74,90,58,0.3) 0%, transparent 55%);
+  }
+  .bluezone-inner { position: relative; z-index: 1; }
+  .bluezone-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    margin-bottom: 80px; align-items: end;
+  }
+  .bluezone-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300; line-height: 1.1; color: white;
+  }
+  .bluezone-header h2 em { font-style: italic; color: var(--clay); }
+  .bluezone-header p { font-size: 0.9rem; line-height: 1.8; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .bluezone-zones {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+  }
+  .zone-item {
+    padding: 32px 24px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    text-align: center; transition: background 0.3s;
+  }
+  .zone-item:hover { background: rgba(74,90,58,0.2); }
+  .zone-flag { font-size: 2rem; margin-bottom: 12px; display: block; }
+  .zone-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: white; margin-bottom: 4px; }
+  .zone-loc { font-size: 0.72rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+  .bluezone-principles {
+    margin-top: 64px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .bp { border-left: 2px solid rgba(255,255,255,0.08); padding-left: 24px; }
+  .bp h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: white; margin-bottom: 8px; }
+  .bp p { font-size: 0.82rem; line-height: 1.7; color: rgba(255,255,255,0.4); font-weight: 300; }
+
+  /* COMMUNITY */
+  .community {
+    padding: 100px 80px;
+    background: var(--warm-white);
+  }
+  .community-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .community-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 24px;
+  }
+  .community-content h2 em { font-style: italic; color: var(--moss); }
+  .community-content p { font-size: 0.95rem; line-height: 1.8; color: var(--mid); font-weight: 300; margin-bottom: 20px; }
+  .community-visual {
+    background: var(--sand); padding: 56px 48px;
+    border-radius: 2px; position: relative; overflow: hidden;
+  }
+  .community-visual::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: var(--terracotta); border-radius: 50%; opacity: 0.08;
+  }
+  .comm-stat {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(74,90,58,0.1);
+  }
+  .comm-stat:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .comm-stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--moss); line-height: 1;
+  }
+  .comm-stat .label { font-size: 0.82rem; color: var(--mid); font-weight: 300; margin-top: 6px; }
+
+  /* MAGAZINE BLOG SECTIE */
+  .blog {
+    padding: 100px 80px;
+    background: var(--sand);
+  }
+  .blog-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(74,90,58,0.15);
+  }
+  .blog-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.1;
+  }
+  .blog-header a { font-size: 0.82rem; color: var(--moss); text-decoration: none; border-bottom: 1px solid var(--moss); padding-bottom: 2px; }
+  .blog-header a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+  .blog-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; }
+  .blog-card { background: white; overflow: hidden; }
+  .blog-card .blog-img {
+    width: 100%; height: 220px;
+    background: linear-gradient(135deg, #D4C9B5, #B8A990);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.25);
+  }
+  .blog-card.featured .blog-img { height: 320px; }
+  .blog-card-body { padding: 32px 28px; }
+  .blog-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 12px; display: block; }
+  .blog-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; line-height: 1.3; margin-bottom: 12px; }
+  .blog-card.featured h3 { font-size: 1.6rem; }
+  .blog-card p { font-size: 0.82rem; line-height: 1.65; color: var(--mid); font-weight: 300; }
+  .blog-date { font-size: 0.7rem; color: rgba(90,90,74,0.5); margin-top: 16px; display: block; }
+
+  /* CTA */
+  .cta-blok {
+    padding: 100px 80px;
+    background: linear-gradient(135deg, var(--terracotta) 0%, var(--clay) 100%);
+    color: white; text-align: center;
+  }
+  .cta-blok h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 300; line-height: 1.1;
+    color: white; margin-bottom: 24px;
+    max-width: 700px; margin-left: auto; margin-right: auto;
+  }
+  .cta-blok p {
+    font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.75);
+    font-weight: 300; max-width: 500px; margin: 0 auto 48px;
+  }
+  .btn-white { background: white; color: var(--terracotta); padding: 16px 40px; font-size: 0.85rem; letter-spacing: 0.08em; text-decoration: none; border-radius: 2px; display: inline-block; transition: background 0.2s; }
+  .btn-white:hover { background: var(--cream); }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.4); padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; letter-spacing: 0.06em; }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: var(--clay); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .pijler-label { animation: fadeUp 0.6s 0.1s both; }
+  h1 { animation: fadeUp 0.6s 0.2s both; }
+  .hero-sub-title { animation: fadeUp 0.6s 0.35s both; }
+  .hero-intro { animation: fadeUp 0.6s 0.45s both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero-content { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 32px; }
+    .pijler-nav { overflow-x: auto; }
+    .pijler-nav a { padding: 16px 20px; min-width: 140px; }
+    .magazine-intro { grid-template-columns: 1fr; padding: 60px 24px; }
+    .ldv { padding: 0 24px 60px; }
+    .ldv-header { grid-template-columns: 1fr; }
+    .ldv-card:nth-child(n) { grid-column: 1 / -1; }
+    .bluezone { padding: 60px 24px; }
+    .bluezone-header { grid-template-columns: 1fr; }
+    .bluezone-zones { grid-template-columns: 1fr 1fr; }
+    .bluezone-principles { grid-template-columns: 1fr; }
+    .community { padding: 60px 24px; }
+    .community-inner { grid-template-columns: 1fr; }
+    .blog { padding: 60px 24px; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .cta-blok { padding: 60px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Annemarie Bosman</a>
+  <ul class="nav-links">
+    <li><a href="vitaliteit.html">Vitaliteit</a></li>
+    <li><a href="vermogen.html">Vermogen</a></li>
+    <li><a href="vrijheid.html" class="active">Vrijheid</a></li>
+    <li><a href="over.html">Over mij</a></li>
+    <li><a href="over.html#contact" class="nav-cta">Kennismaken</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div>
+      <div class="breadcrumb"><a href="index.html">Home</a> › <span>Vrijheid</span></div>
+      <div class="pijler-label">Pijler 03</div>
+      <h1>Vrij&shy;heid</h1>
+    </div>
+    <div class="hero-right-content">
+      <div class="hero-sub-title">Leven zoals jij het wil</div>
+      <p class="hero-intro">
+        Als je lichaam en hoofd op orde zijn, ontstaat er ruimte.
+        Ruimte voor vreugde, voor smaak, voor verbinding — voor een leven
+        dat écht van jou is. Vrijheid is niet een doel, het is een leefstijl.
+      </p>
+      <div class="hero-ctas">
+        <a href="#ldv" class="btn-primary">Local Dolce Vita</a>
+        <a href="#community" class="btn-ghost">Word lid van de community →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pijler-nav">
+  <a href="vitaliteit.html">
+    <span class="pijler-num">01</span>
+    <span class="pijler-name">Vitaliteit</span>
+    <span class="pijler-sub">Lichaam & microbioom</span>
+  </a>
+  <a href="vermogen.html">
+    <span class="pijler-num">02</span>
+    <span class="pijler-name">Vermogen</span>
+    <span class="pijler-sub">Brein & eigenaarschap</span>
+  </a>
+  <a href="vrijheid.html" class="active">
+    <span class="pijler-num">03</span>
+    <span class="pijler-name">Vrijheid</span>
+    <span class="pijler-sub">Leefstijl & leven</span>
+  </a>
+</div>
+
+<section class="magazine-intro">
+  <div class="mag-quote">
+    "Vrijheid begint niet als je alles hebt wat je wil — het begint als je <strong>weet wie je bent</strong> en wat je lichaam je vertelt."
+  </div>
+  <div class="mag-aside">
+    <span class="section-label">De derde pijler</span>
+    <p>Na vitaliteit en vermogen komt vrijheid. Het is de plek waar gezondheid ophoudt een inspanning te zijn en een manier van leven wordt. Lekker eten, bewust genieten, verbonden zijn — met jezelf, je omgeving en je gemeenschap.</p>
+  </div>
+</section>
+
+<!-- LOCAL DOLCE VITA -->
+<section class="ldv" id="ldv">
+  <div class="ldv-header">
+    <h2>Local<br>Dolce Vita</h2>
+    <p>Een groeiende foodclub waar je alles leert over gezond, lekker en vooral lokaal eten. Eten van dichtbij is het nieuwe luxe. We brengen de mooiste streekproducten van Zeeland naar de Randstad — met een hoofdrol voor zilte zeegroenten en pure smaken van land en zee.</p>
+  </div>
+  <div class="ldv-grid">
+    <div class="ldv-card featured">
+      <span class="card-tag">De filosofie</span>
+      <h3>Lokale smaken, bijzondere ervaringen</h3>
+      <p>Local Dolce Vita verbindt mensen die kiezen voor lokaal, eerlijk en samen genieten. We bouwen aan een community rondom voeding als levenskunst — niet als dieet, maar als genot.</p>
+    </div>
+    <div class="ldv-card">
+      <div class="img-placeholder">[ foto streekproducten ]</div>
+      <span class="card-tag">Producten</span>
+      <h3>Zeeuws & puur</h3>
+      <p>Zilte zeegroenten, vis van de kust, lokale kazen en verse seizoensproducten. Rechtstreeks van de producent naar jouw tafel.</p>
+    </div>
+    <div class="ldv-card">
+      <div class="img-placeholder">[ foto event ]</div>
+      <span class="card-tag">Events</span>
+      <h3>Samen aan tafel</h3>
+      <p>Proeverijen, kooklessen en bijzondere tafelmomenten. Waar eten een verhaal wordt.</p>
+    </div>
+    <div class="ldv-card">
+      <div class="img-placeholder">[ foto advies ]</div>
+      <span class="card-tag">Advies</span>
+      <h3>Persoonlijk voedings&shy;advies</h3>
+      <p>Leefstijl- en voedingsadvies gekoppeld aan jouw microbioom en jouw doelen.</p>
+    </div>
+    <div class="ldv-card">
+      <span class="card-tag">Community</span>
+      <h3>Gelijkgestemde zielen</h3>
+      <p>Een groep mensen die bewust leven, genieten en elkaar inspireren. Lokale smaken als verbinding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLUE ZONES -->
+<section class="bluezone">
+  <div class="bluezone-inner">
+    <div class="bluezone-header">
+      <h2>Geïnspireerd door de <em>Blue Zones</em></h2>
+      <p>Blue Zones zijn de vijf plekken op aarde waar mensen het langst, gezondst en gelukkigst leven. Niet dankzij supplementen of diëten, maar dankzij een manier van leven. Dat is de inspiratie achter alles wat ik doe.</p>
+    </div>
+    <div class="bluezone-zones">
+      <div class="zone-item">
+        <span class="zone-flag">🇮🇹</span>
+        <div class="zone-name">Sardinië</div>
+        <div class="zone-loc">Italië</div>
+      </div>
+      <div class="zone-item">
+        <span class="zone-flag">🇯🇵</span>
+        <div class="zone-name">Okinawa</div>
+        <div class="zone-loc">Japan</div>
+      </div>
+      <div class="zone-item">
+        <span class="zone-flag">🇺🇸</span>
+        <div class="zone-name">Loma Linda</div>
+        <div class="zone-loc">Californië</div>
+      </div>
+      <div class="zone-item">
+        <span class="zone-flag">🇨🇷</span>
+        <div class="zone-name">Nicoya</div>
+        <div class="zone-loc">Costa Rica</div>
+      </div>
+      <div class="zone-item">
+        <span class="zone-flag">🇬🇷</span>
+        <div class="zone-name">Ikaria</div>
+        <div class="zone-loc">Griekenland</div>
+      </div>
+    </div>
+    <div class="bluezone-principles">
+      <div class="bp">
+        <h3>Bewegen zonder nadenken</h3>
+        <p>In Blue Zones bewegen mensen van nature de hele dag — niet in de sportschool, maar in hun dagelijks leven. Tuinieren, wandelen, handwerk.</p>
+      </div>
+      <div class="bp">
+        <h3>Eten met purpose</h3>
+        <p>Plantaardig, lokaal, seizoensgebonden en met aandacht. Ze eten tot ze 80% vol zijn — en genieten van elk hapje.</p>
+      </div>
+      <div class="bp">
+        <h3>Verbonden leven</h3>
+        <p>Sterke sociale banden, gevoel van gemeenschap en zingeving zijn net zo belangrijk als voeding. Eenzaamheid is een gezondheidsrisico.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community" id="community">
+  <div class="community-inner">
+    <div class="community-content">
+      <span class="section-label">De community</span>
+      <h2>Vrijheid is <em>beter samen</em></h2>
+      <p>We bouwen aan een community van mensen die kiezen voor bewust leven, lokaal eten en gezondheid als levensstijl. Niet als verplichting, maar als feest.</p>
+      <p>In de toekomst wordt deze community ook verankerd in Web3 — een gedecentraliseerde ruimte waar leden eigenaarschap hebben over hun bijdrage, hun data en hun gezondheidsreis.</p>
+      <a href="over.html#contact" class="btn-primary" style="display:inline-block;margin-top:16px;">Ik wil erbij!</a>
+    </div>
+    <div class="community-visual">
+      <div class="comm-stat">
+        <div class="num">3×</div>
+        <div class="label">De succesvolle Microbioom Reset is al drie keer herhaald in groepsverband</div>
+      </div>
+      <div class="comm-stat">
+        <div class="num">5</div>
+        <div class="label">Essentiële principes voor gezondheid en geluk — samen leer je ze kennen</div>
+      </div>
+      <div class="comm-stat">
+        <div class="num">∞</div>
+        <div class="label">Gelijkgestemde mensen die kiezen voor lokaal, eerlijk en samen genieten</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG / MAGAZINE -->
+<section class="blog">
+  <div class="blog-header">
+    <h2>Inspiratie & kennis</h2>
+    <a href="#">Alle artikelen →</a>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card featured">
+      <div class="blog-img">[ hoofdfoto artikel ]</div>
+      <div class="blog-card-body">
+        <span class="blog-tag">Microbioom</span>
+        <h3>De Magische Driehoek: Bodem, Buik, Brein</h3>
+        <p>Onze gezondheid begint niet in de apotheek, maar in de aarde onder onze voeten. Wat als de sleutel tot een sterk immuunsysteem zit in hoe onze voeding wordt geproduceerd?</p>
+        <span class="blog-date">Maart 2025</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img">[ foto ]</div>
+      <div class="blog-card-body">
+        <span class="blog-tag">Missie</span>
+        <h3>On a Mission for Microbiome Diversity</h3>
+        <p>Wat als de basis van onze gezondheid niet in onze lichaamscellen ligt, maar in iets wat veel ouder en intelligenter is?</p>
+        <span class="blog-date">Januari 2025</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img">[ foto ]</div>
+      <div class="blog-card-body">
+        <span class="blog-tag">Leefstijl</span>
+        <h3>Lokaal eten als daad van vrijheid</h3>
+        <p>Waarom de keuze voor streekproducten zoveel meer is dan duurzaamheid — het is een keuze voor jezelf.</p>
+        <span class="blog-date">Binnenkort</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-blok">
+  <h2>Van een uitgeput leven naar een vrij leven</h2>
+  <p>Begin vandaag met een gratis kennismaking. Jouw reis naar vitaliteit, vermogen en vrijheid start hier.</p>
+  <a href="over.html#contact" class="btn-white">Plan een gratis kennismaking</a>
+</section>
+
+<footer>
+  <div>© 2025 Annemarie Bosman · <a href="#">Disclaimer</a> · <a href="#">Algemene Voorwaarden</a> · <a href="#">Privacy</a></div>
+  <div>Ontwerp door <a href="#">Studio Fingerspitzengefühl</a></div>
+</footer>
+</body>
+</html>
