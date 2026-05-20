@@ -1,4 +1,4 @@
- name: Deploy naar Juno
+name: Deploy naar Juno
 on:
   workflow_dispatch:
   push:
