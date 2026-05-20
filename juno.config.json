@@ -1,5 +1,6 @@
 {
   "satellite": {
-    "id": "cfskk-oaaaa-aaaal-aszzq-cai"
+    "id": "JOUW_SATELLITE_ID",
+    "source": "."
   }
 }
