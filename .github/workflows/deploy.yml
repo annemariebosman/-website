@@ -1,0 +1,19 @@
+ name: Deploy naar Juno
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Repository uitchecken
+        uses: actions/checkout@v4
+      - name: Implementeren naar Juno
+        uses: junobuild/juno-action@main
+        with:
+          args: hosting deploy
+        env:
+          JUNO_TOKEN: ${{ secrets.JUNO_TOKEN }}
